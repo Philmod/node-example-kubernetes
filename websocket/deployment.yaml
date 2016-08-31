@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: websocket
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: node-example
+        tier: websocket
+    spec:
+      containers:
+      - name: websocket
+        image: gcr.io/node-example-gke/websocket:v3
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 3002
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /status?deployment=1
+            port: 3002
+          initialDelaySeconds: 15
+          timeoutSeconds: 1
