@@ -3,29 +3,36 @@ kind: Deployment
 metadata:
   name: frontend
 spec:
-  replicas: 1
+  replicas: 3
   template:
     metadata:
       labels:
-        app: node-example
-        tier: frontend
+        app: frontend
     spec:
       containers:
       - name: frontend
-        image: gcr.io/node-example-gke/frontend:v7
+        image: gcr.io/node-example-gke/frontend:v9
         resources:
           requests:
             cpu: 100m
             memory: 100Mi
         env:
         - name: WEBSOCKET_HOST
-          value: ws://104.196.137.73
+          value: /
+        - name: WEBSOCKET_PATH
+          value: /websocket/websocket
         ports:
         - containerPort: 3001
           protocol: TCP
         livenessProbe:
           httpGet:
-            path: /status?deployment=1
+            path: /status?livenessProbe=1
+            port: 3001
+          initialDelaySeconds: 15
+          timeoutSeconds: 1
+        readinessProbe:
+          httpGet:
+            path: /status?readinessProbe=1
             port: 3001
           initialDelaySeconds: 15
           timeoutSeconds: 1

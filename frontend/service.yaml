@@ -2,16 +2,15 @@ apiVersion: v1
 kind: Service
 metadata:
   name: frontend
+  annotations:
+    serviceloadbalancer/lb.aclMatch: "-i /"
   labels:
-    app: node-example
-    tier: frontend
+    app: frontend
 spec:
-  type: LoadBalancer
   ports:
   - name: frontend-service
     port: 80
     protocol: TCP
     targetPort: 3001
   selector:
-    app: node-example
-    tier: frontend
+    app: frontend

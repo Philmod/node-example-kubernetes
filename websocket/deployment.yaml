@@ -3,26 +3,34 @@ kind: Deployment
 metadata:
   name: websocket
 spec:
-  replicas: 1
+  replicas: 3
   template:
     metadata:
       labels:
-        app: node-example
-        tier: websocket
+        app: websocket
     spec:
       containers:
       - name: websocket
-        image: gcr.io/node-example-gke/websocket:v3
+        image: gcr.io/node-example-gke/websocket:v6
         resources:
           requests:
             cpu: 100m
             memory: 100Mi
+        env:
+        - name: WEBSOCKET_PATH
+          value: /websocket
         ports:
         - containerPort: 3002
           protocol: TCP
         livenessProbe:
           httpGet:
-            path: /status?deployment=1
+            path: /status?livenessProbe=1
+            port: 3002
+          initialDelaySeconds: 15
+          timeoutSeconds: 1
+        readinessProbe:
+          httpGet:
+            path: /status?readinessProbe=1
             port: 3002
           initialDelaySeconds: 15
           timeoutSeconds: 1
