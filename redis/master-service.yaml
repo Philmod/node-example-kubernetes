@@ -3,12 +3,14 @@ kind: Service
 metadata:
   name: redis-master
   labels:
-    app: redis
+    app: node-example
     role: master
+    name: redis
+    visualize: 'true'
 spec:
   ports:
   - port: 6379
     targetPort: 6379
   selector:
-    app: redis
+    name: redis
     role: master

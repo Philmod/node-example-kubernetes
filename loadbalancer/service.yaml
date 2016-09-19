@@ -3,10 +3,12 @@ kind: Service
 metadata:
   name: haproxy
   labels:
-    app: service-loadbalancer
+    app: node-example
+    name: service-loadbalancer
+    visualize: 'true'
 spec:
   type: LoadBalancer
   ports:
   - port: 80
   selector:
-    app: service-loadbalancer
+    name: service-loadbalancer

@@ -5,7 +5,9 @@ metadata:
   annotations:
     serviceloadbalancer/lb.aclMatch: "-i /"
   labels:
-    app: frontend
+    app: node-example
+    name: frontend
+    visualize: 'true'
 spec:
   ports:
   - name: frontend-service
@@ -13,4 +15,4 @@ spec:
     protocol: TCP
     targetPort: 3001
   selector:
-    app: frontend
+    name: frontend

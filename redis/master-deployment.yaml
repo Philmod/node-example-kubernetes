@@ -3,15 +3,19 @@ kind: Deployment
 metadata:
   name: redis-master
   labels:
-    app: redis
+    app: node-example
     role: master
+    name: redis
+    visualize: 'true'
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: redis
+        app: node-example
         role: master
+        name: redis
+        visualize: 'true'
     spec:
       containers:
       - name: master

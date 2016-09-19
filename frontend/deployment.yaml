@@ -2,12 +2,15 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: frontend
+  visualize: 'true'
 spec:
   replicas: 3
   template:
     metadata:
       labels:
-        app: frontend
+        app: node-example
+        name: frontend
+        visualize: 'true'
     spec:
       containers:
       - name: frontend

@@ -7,7 +7,9 @@ metadata:
     # Enable sticky-ness on "SERVERID"
     serviceloadbalancer/lb.cookie-sticky-session: "true"
   labels:
-    app: websocket
+    app: node-example
+    name: websocket
+    visualize: 'true'
 spec:
   ports:
   - name: websocket-service
@@ -15,4 +17,4 @@ spec:
     protocol: TCP
     targetPort: 3002
   selector:
-    app: websocket
+    name: websocket
