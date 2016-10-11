@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: redis-master
+  name: redis
   labels:
     app: node-example
-    role: master
     name: redis
+    role: master
     visualize: 'true'
 spec:
   ports:

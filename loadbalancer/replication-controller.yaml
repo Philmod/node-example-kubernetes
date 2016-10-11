@@ -10,16 +10,15 @@ metadata:
 spec:
   replicas: 2
   selector:
-    app: node-example
     name: service-loadbalancer
     version: v1
-    visualize: 'true'
-    uses: frontend, websocket
   template:
     metadata:
       labels:
         app: node-example
         version: v1
+        visualize: 'true'
+        uses: frontend, websocket
     spec:
       nodeSelector:
         role: loadbalancer

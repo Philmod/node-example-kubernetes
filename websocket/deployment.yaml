@@ -11,7 +11,7 @@ spec:
         app: node-example
         name: websocket
         visualize: 'true'
-        uses: 'redis'
+        uses: redis
     spec:
       containers:
       - name: websocket
