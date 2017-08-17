@@ -9,8 +9,8 @@ metadata:
     visualize: 'true'
 spec:
   ports:
-  - port: 6379
-    targetPort: 6379
+    - port: 6379
+      targetPort: 6379
   selector:
     name: redis
     role: master

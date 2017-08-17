@@ -18,11 +18,33 @@ spec:
         visualize: 'true'
     spec:
       containers:
-      - name: master
-        image: redis
-        resources:
-          requests:
-            cpu: 100m
-            memory: 100Mi
-        ports:
-        - containerPort: 6379
+        - name: master
+          image: redis
+          command:
+            - "redis-server"
+          args:
+            - "/etc/redis/redis.conf"
+            - "--protected-mode"
+            - "no"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          ports:
+            - containerPort: 6379
+          volumeMounts:
+            - name: "redis-conf"
+              mountPath: "/etc/redis"
+            - name: "redis-data"
+              mountPath: "/var/lib/redis"
+      volumes:
+        - name: "redis-data"
+          gcePersistentDisk:
+            pdName: "redis-disk"
+            fsType: ext4
+        - name: "redis-conf"
+          configMap:
+            name: "redis-conf"
+            items:
+              - key: "redis.conf"
+                path: "redis.conf"
