@@ -20,8 +20,6 @@ spec:
         visualize: 'true'
         uses: frontend, websocket
     spec:
-      nodeSelector:
-        role: loadbalancer
       containers:
       - image: gcr.io/google_containers/servicelb:0.4
         imagePullPolicy: Always
